@@ -7,7 +7,7 @@ git clone https://github.com/nkrishn9/mini_project_1.git
 chmod -x run.sh
 source run.sh
 ```
-This code is intended to run on the JHU CS ugrad cluster. 
+This code is intended to run on the JHU CS ugrad cluster. The figures 1, 1A, and 2 will be generated in the results directory.
 
 ## Abstract ##
 In this project, we attempted to use GTEx data to predict the age of a patient given their cis-eQTL data. This was done using the cis-eQTL gene expression data of each of four tissue types-adipose subcutaneous, muscle skeletal, thyroid, whole blood. We used a simple model, ridge regression, trained on the top 1000 genes with the highest univariate correlation with our label, age. Cross-validation on the training data was used to tune the alpha hyperparameter (regularization constant), and was then used along with the beta coefficients to predict age in our testing set. Root mean squared error was reported across different training sizes and thyroid appears to be the optimal tissue for predicting age, across training size setups. 
@@ -37,3 +37,6 @@ We trained again using all of the samples in each training split for each tissue
 [figure1]: https://github.com/nkrishn9/mini_project_1/blob/master/results/figure_1.png
 [figure1a]: https://github.com/nkrishn9/mini_project_1/blob/master/results/figure_1A.png
 [figure2]: https://github.com/nkrishn9/mini_project_1/blob/master/results/figure_2.png
+
+### Discussion ###
+Based on the results in figures 1A and 2, the ridge regression model using thyroid cis-eQTL data is the best at predicting the age of the patient. In figure 1A, we see that across training-increment configurations, thyroid is the lowest line in the graph, indicating the lowest error on prediction in the testing set. As expected, across tissues the RMSE is minimal when the number of examples used in training is maximial, indicating that after 200 examples are seen, a good approximation of the true distribution is reached. In figure 2, we can see that in both configurations, using all samples and using the largest common number of training examples across tissues, thyroid performs optimally. 
