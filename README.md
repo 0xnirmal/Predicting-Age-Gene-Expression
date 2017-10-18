@@ -24,4 +24,10 @@ We did not transform the data other than the labels, because the GTEx data is al
 The training data for each tissue was split using leave-one-out cross-validation in order to evaluate regularization parameters (alphas). We evaluated alphas across different scales (0.1, 1.0, 10.0, 100), and used the alpha for each tissue that resulted in the highest root mean-squared error. 
 
 ### Training/ Prediction ###
-Once the alpha parameters had been selected using CV, we trained 4 different 
+Once the alpha parameters had been selected using CV, we trained 4 different ridge regression model using the training data for each tissue and its corresponding alpha. We trained using increments of samples from our training data, specifically increments of 10 from 50 to 300. Its important to note that the training-testing splits occurred before incrementational model learning, so the testing data stays the same across training configurations. That is, the testing size is constant--always 30% of the original data, while the training size varies. This can in some cases be problematic if the testing size is too small, because then the testing size does not represent an empirical sampling of your actual distribution and your results compared across tissues will be inaccurate (may favor the larger testing sets over the smaller). However, we felt our testing size (~100) were large enough and the differences across the number of samples in testing set for each tissues small enough that this would not bias our results. 
+
+Once the models were trained across our different tranings data sized increments, we predicting on our testing splits and reported the root mean squared errors for each, seen in figure 1 (for muscle-skeletal) and figure 1A (all tissues) below: 
+
+
+
+We trained again using all of the samples in each training split for each tissue and also using the largest common number of training examples across tissues. The results can be seen below. 
