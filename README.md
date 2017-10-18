@@ -18,9 +18,10 @@ I recommend taking a peek at the age_prediction.ipynb to gain an understanding o
 ### Data Processing ###
 This step was a fairly standard approach to a machine learning problem. First, we generated our design matrices for each of our tissues (separately), orienting them such that rows represented patients and columns represented genes. We then constructed our labels for each patient. This was slightly problematic because the reported GTEx ages are 10-year ranges, such at 60-69. Since we cannot infer anything else, we chose to represent this just as the first number in the range. The decision to represent age as a continuous value rather than a classification label is important because there is inherently a hierarchical structure to age. The age range 70-79 not only communicates belonging to class, but it also communicates that it is greater than the class 60-69 and less than the class 80-89. For this reason, it only makes sense to model the problem as a regression. 
 
-We did not transform the data other than the labels, because the GTEx data is already mean centered and normalized. In terms of splitting the data, we performed a standard 70% training 30% testing split, in order to evaluate our model. The training data was used for hyperparameter tuning, discussed in the next section.
+We did not transform the data other than the labels, because the GTEx data is already mean centered and normalized. In terms of splitting the data, we performed a standard 70% training 30% testing split for each tissue dataset, in order to evaluate our model. On the training data, we then performed basic feature selection using an f-regression between gene and label. We chose to use an f-regression because the model we are using the predict age is a linear model (ridge regression). Therefore, we want to select features that are univariately correlated with our label in order for our model to get a good signal. We selected the top 1000 genes.
 
 ### Cross-Validation Hyperparameter Tuning ###
+The training data for each tissue was split using leave-one-out cross-validation in order to evaluate regularization parameters (alphas). We evaluated alphas across different scales (0.1, 1.0, 10.0, 100), and used the alpha for each tissue that resulted in the highest root mean-squared error. 
 
-
-### Prediction ###
+### Training/ Prediction ###
+Once the alpha parameters had been selected using CV, we trained 4 different 
