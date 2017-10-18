@@ -7,6 +7,8 @@ import numpy as np
 import pandas as pd
 import sys
 import argparse
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt 
 plt.style.use('ggplot')
 from sklearn import linear_model
