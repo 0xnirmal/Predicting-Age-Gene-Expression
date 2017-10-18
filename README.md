@@ -35,7 +35,7 @@ We trained again using all of the samples in each training split for each tissue
 ![figure2]
 
 
-### Discussion ###
+## Discussion ##
 Based on the results in figures 1A and 2, the ridge regression model using thyroid cis-eQTL data is the best at predicting the age of the patient. In figure 1A, we see that across training-increment configurations, thyroid is the lowest line in the graph, indicating the lowest error on prediction in the testing set. As expected, across tissues the RMSE is minimal when the number of examples used in training is maximial, indicating that after 200 examples are seen, a good approximation of the true distribution is reached. In figure 2, we can see that in both configurations, using all samples and using the smallest common number of training examples across tissues, thyroid performs optimally. 
 
 In terms of intepreting the results, we cannot take the RMSE to indicate the actual average error of prediction in terms of real-valued age (i.e just because our RMSE for thyroid is ~7, we cannot say that on average our prediction is off by 7 years). This is because of how the labels were encoded. Consider a case where a patient is aged 69. We place them in the 60 bucket, and then upon prediction, we predict their age using thyroid data to be 53. The error recorded is only 7, however, in actual biological space, the error is 16. Therefore, RMSE can be only used to compare the predictive accuracies of tissues, not to evaluate thyroid as a predictor of age itself. We could obviously improve our analysis here if the actual ages were provided to us upon sequencing, as there would no longer be noise associated with our labels. 
