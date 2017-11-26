@@ -3,7 +3,7 @@
 
 ## Running Instructions ##
 ```
-git clone https://github.com/nkrishn9/mini_project_1.git
+git clone https://github.com/nkrishn9/Predicting-Age-Gene-Expression.git
 chmod -x run.sh
 source run.sh
 ```
